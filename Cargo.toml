@@ -1,0 +1,8 @@
+[project]
+
+name = "soundex"
+version = "0.0.1"
+authors = ["David C. Bishop <david@davidbishop.org>"]
+
+[[lib]]
+name = "soundex"

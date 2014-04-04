@@ -24,11 +24,15 @@ fn head<'a>(string: &'a str) -> &'a str {
 
 fn encoded_digits(word: &str) -> ~str {
     if word.len() > 1 {
-        return encode_digit();
+        return encode_digit(word[1]);
     }
     return ~"";
 }
 
-fn encode_digit() -> ~str {
+fn encode_digit(letter: u8) -> ~str {
+    if letter == 'c' as u8 {
+        return ~"2";
+    }
+
     return ~"1";
 }

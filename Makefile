@@ -1,4 +1,4 @@
-RUSTC=rustc -g
+RUSTC=rustc
 
 TARGET_NAME=soundex
 TEST_BIN_NAME=${BUILD_DIR}/${TARGET_NAME}-test
@@ -33,5 +33,5 @@ ${EXAMPLE_BIN_NAME}: ${EXAMPLE_SRC} lib ${BUILD_DIR}
 	${RUSTC} ${EXAMPLE_SRC} -o ${EXAMPLE_BIN_NAME} -L ${BUILD_DIR}
 
 clean:
-	rm -f ${BUILD_DIR}/*rlib ${TEST_BIN_NAME} ${DUMMY_FILE}
+	rm -f ${BUILD_DIR}/*rlib ${BUILD_DIR}/*.o ${TEST_BIN_NAME} ${DUMMY_FILE}
 	rmdir --ignore-fail-on-non-empty ${BUILD_DIR}

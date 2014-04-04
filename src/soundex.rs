@@ -6,6 +6,6 @@ impl Soundex {
     }
 
     pub fn encode(&self, string: &str) -> ~str {
-        return string.clone().to_owned();
+        return string.to_owned();
     }
 }

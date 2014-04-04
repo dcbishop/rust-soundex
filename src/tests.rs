@@ -15,3 +15,10 @@ fn soundex_encoding_pads_with_zeros_to_ensure_three_digits() {
     let encoded = soundex.encode("I");
     assert_eq!(encoded, ~"I000");
 }
+
+#[test]
+fn soundex_encoding_replaces_constants_with_appropriate_digits() {
+    let soundex = Soundex::new();
+    let encoded = soundex.encode("Ab");
+    assert_eq!(encoded, ~"A100");
+}

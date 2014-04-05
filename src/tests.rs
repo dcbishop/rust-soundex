@@ -52,3 +52,9 @@ fn soundex_encoding_combines_duplicate_encodings() {
    assert_eq!(soundex::encoded_digit('d'), soundex::encoded_digit('t'));
    check_soundex(~"Abfcgdt", ~"A123");
 }
+
+#[test]
+fn soundex_encoding_uppercases_first_letter() {
+    let soundex = Soundex::new();
+    assert_eq!(soundex.encode("abcd").slice_to(1).to_owned(), ~"A");
+}

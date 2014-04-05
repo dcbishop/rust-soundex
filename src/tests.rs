@@ -39,3 +39,8 @@ fn soundex_encoding_limits_length_to_four_characters() {
     let soundex = Soundex::new();
     assert_eq!(soundex.encode("Dcdlb").len(), 4);
 }
+
+#[test]
+fn soundex_encoding_ignores_vowel_like_letters() {
+   check_soundex(~"Baeiouhycdl", ~"B234"); 
+}

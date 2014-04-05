@@ -8,7 +8,7 @@ impl Soundex {
     }
 
     pub fn encode(&self, word: &str) -> ~str {
-        let encoded = zero_pad(head(word) + encoded_digits(word));
+        let encoded = zero_pad(head(word) + encoded_digits(tail(word)));
         return encoded;
     }
 }
@@ -22,9 +22,13 @@ fn head<'a>(string: &'a str) -> &'a str {
     return string.slice_to(1);
 }
 
+fn tail<'a>(string: &'a str) -> &'a str {
+    return string.slice_from(1);
+}
+
 fn encoded_digits(word: &str) -> ~str {
-    if word.len() > 1 {
-        return encode_digit(word[1]);
+    if word.len() > 0 {
+        return encode_digit(word[0]);
     }
     return ~"";
 }

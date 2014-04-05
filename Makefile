@@ -11,7 +11,7 @@ TEST_SRC=${SRC_DIR}/tests.rs
 EXAMPLE_SRC=${SRC_DIR}/examples/example.rs
 DUMMY_FILE=${BUILD_DIR}/lib${TARGET_NAME}.dummy
 
-SRCS = $(shell find src/. -type f -name '*.rs')
+SRCS = $(shell find src -type f -name '*.rs')
 
 all: lib test
 lib: ${DUMMY_FILE}

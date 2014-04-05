@@ -58,3 +58,9 @@ fn soundex_encoding_uppercases_first_letter() {
     let soundex = Soundex::new();
     assert_eq!(soundex.encode("abcd").slice_to(1).to_owned(), ~"A");
 }
+
+#[test]
+fn soundex_encoding_ignores_case_when_encoding_consonants() {
+    let soundex = Soundex::new();
+    assert_eq!(soundex.encode("BCDL"), soundex.encode("Bcdl"));
+}

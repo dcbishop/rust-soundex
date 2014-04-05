@@ -54,7 +54,7 @@ fn encoded_digits(word: &str) -> ~str {
 }
 
 pub fn encoded_digit(letter: char) -> ~str {
-    return match letter {
+    return match letter.to_lowercase() {
         'b' | 'f' | 'p' | 'v' => ~"1",
         'c' | 'g' | 'j' | 'k' | 'q' | 's' | 'x' | 'z' => ~"2",
         'd' | 't' => ~"3",

@@ -30,7 +30,7 @@ fn encoded_digits(word: &str) -> ~str {
     let mut encoding = ~"";
 
     for c in word.bytes() {
-        encoding.push_str(encode_digit(c));
+        encoding.push_str(encoded_digit(c as char));
         if is_complete(encoding) {
             break;
         }
@@ -39,10 +39,8 @@ fn encoded_digits(word: &str) -> ~str {
     return encoding;
 }
 
-fn encode_digit(letter: u8) -> ~str {
-    let c_letter = letter as char;
-
-    return match c_letter {
+fn encoded_digit(letter: char) -> ~str {
+    return match letter {
         'b' | 'f' | 'p' | 'v' => ~"1",
         'c' | 'g' | 'j' | 'k' | 'q' | 's' | 'x' | 'z' => ~"2",
         'd' | 't' => ~"3",

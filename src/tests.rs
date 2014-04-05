@@ -42,7 +42,7 @@ fn soundex_encoding_limits_length_to_four_characters() {
 
 #[test]
 fn soundex_encoding_ignores_vowel_like_letters() {
-   check_soundex(~"Baeiouhycdl", ~"B234"); 
+   check_soundex(~"BaAeEiIoOuUhHyYcdl", ~"B234");
 }
 
 #[test]

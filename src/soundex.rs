@@ -37,19 +37,31 @@ fn tail<'a>(string: &'a str) -> &'a str {
 }
 
 fn encoded_digits(word: &str) -> ~str {
-    let mut encoding = encoded_digit(word.char_at(0));
+    let mut encoding: ~str;
+    encoding = encode_head(word);
+    encoding = encode_tail(encoding, word);
+    return encoding;
+}
 
+fn encode_head(word: &str) -> ~str {
+   return encoded_digit(word.char_at(0));
+}
+
+fn encode_tail(mut encoding: ~str, word: &str) -> ~str {
     for letter in tail(word).chars() {
-        if is_complete(encoding) {
-            break;
-        }
-
-        let digit = encoded_digit(letter);
-        if !str::eq_slice(digit, NOT_A_DIGIT) && encoded_digit(letter) != last_digit(encoding) {
-            encoding.push_str(encoded_digit(letter));
+        if !is_complete(encoding) {
+            encoding = encode_letter(encoding, letter);
         }
     }
 
+    return encoding;
+}
+
+fn encode_letter(mut encoding: ~str, letter: char) -> ~str {
+    let digit = encoded_digit(letter);
+    if !str::eq_slice(digit, NOT_A_DIGIT) && encoded_digit(letter) != last_digit(encoding) {
+        encoding.push_str(encoded_digit(letter));
+    }
     return encoding;
 }
 

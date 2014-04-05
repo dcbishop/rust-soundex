@@ -27,10 +27,13 @@ fn tail<'a>(string: &'a str) -> &'a str {
 }
 
 fn encoded_digits(word: &str) -> ~str {
-    if word.len() > 0 {
-        return encode_digit(word[0]);
+    let mut encoding = ~"";
+
+    for c in word.bytes() {
+        encoding.push_str(encode_digit(c));
     }
-    return ~"";
+
+    return encoding;
 }
 
 fn encode_digit(letter: u8) -> ~str {

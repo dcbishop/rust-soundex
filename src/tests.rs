@@ -29,7 +29,6 @@ fn soundex_encoding_ignores_non_alphabetics() {
     check_soundex(~"A#", ~"A000");
 }
 
-#[ignore]
 #[test]
 fn soundex_encoding_replaces_multiple_consonants_with_digits() {
     check_soundex(~"Acdl", ~"A234");

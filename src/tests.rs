@@ -69,3 +69,8 @@ fn soundex_encoding_ignores_case_when_encoding_consonants() {
 fn soundex_encoding_combines_duplicate_codes_when_2nd_letter_duplicates_1st() {
     check_soundex(~"Bbcd", ~"B230");
 }
+
+#[test]
+fn souncex_encoding_does_not_combine_duplicated_encodings_seperated_by_vowels() {
+   check_soundex(~"Jbob", ~"J110");
+}

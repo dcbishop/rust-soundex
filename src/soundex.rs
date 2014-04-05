@@ -48,18 +48,22 @@ fn encode_head(word: &str) -> ~str {
 }
 
 fn encode_tail(mut encoding: ~str, word: &str) -> ~str {
-    for letter in tail(word).chars() {
+    for i in range(1, word.len()) {
         if !is_complete(encoding) {
-            encoding = encode_letter(encoding, letter);
+            encoding = encode_letter(encoding, word.char_at(i), word.char_at(i-1));
         }
     }
 
     return encoding;
 }
 
-fn encode_letter(mut encoding: ~str, letter: char) -> ~str {
+fn is_complete(encoding: &str) -> bool {
+    return encoding.len() == MAX_CODE_LENGTH;
+}
+
+fn encode_letter(mut encoding: ~str, letter: char, last_letter: char) -> ~str {
     let digit = encoded_digit(letter);
-    if !str::eq_slice(digit, NOT_A_DIGIT) && encoded_digit(letter) != last_digit(encoding) {
+    if !str::eq_slice(digit, NOT_A_DIGIT) && (digit != last_digit(encoding) || is_vowel(last_letter)) {
         encoding.push_str(encoded_digit(letter));
     }
     return encoding;
@@ -77,13 +81,16 @@ pub fn encoded_digit(letter: char) -> ~str {
     };
 }
 
-fn is_complete(encoding: &str) -> bool {
-    return encoding.len() == MAX_CODE_LENGTH;
-}
-
 fn last_digit(encoding: &str) -> ~str {
     if encoding.len() == 0 {
         return NOT_A_DIGIT.to_owned();
     }
     return encoding.slice(encoding.len()-1, encoding.len()).to_owned();
+}
+
+fn is_vowel(letter: char) -> bool {
+   return match letter {
+       'a' | 'e' | 'i' | 'o' | 'u' => true,
+        _ => false,
+   };
 }

@@ -31,6 +31,9 @@ fn encoded_digits(word: &str) -> ~str {
 
     for c in word.bytes() {
         encoding.push_str(encode_digit(c));
+        if is_complete(encoding) {
+            break;
+        }
     }
 
     return encoding;
@@ -48,4 +51,8 @@ fn encode_digit(letter: u8) -> ~str {
         'r' => ~"6",
         _ => ~"",
     };
+}
+
+fn is_complete(encoding: &str) -> bool {
+    return encoding.len() == MAX_CODE_LENGTH -1;
 }

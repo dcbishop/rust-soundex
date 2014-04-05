@@ -33,3 +33,9 @@ fn soundex_encoding_ignores_non_alphabetics() {
 fn soundex_encoding_replaces_multiple_consonants_with_digits() {
     check_soundex(~"Acdl", ~"A234");
 }
+
+#[test]
+fn soundex_encoding_limits_length_to_four_characters() {
+    let soundex = Soundex::new();
+    assert_eq!(soundex.encode("Dcdlb").len(), 4);
+}

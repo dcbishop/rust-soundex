@@ -11,7 +11,7 @@ impl Soundex {
     }
 
     pub fn encode(&self, word: &str) -> ~str {
-        let encoded = zero_pad(upper_front(head(word)) + encoded_digits(tail(word)));
+        let encoded = zero_pad(upper_front(head(word)) + tail(encoded_digits(word)));
         return encoded;
     }
 }
@@ -37,9 +37,9 @@ fn tail<'a>(string: &'a str) -> &'a str {
 }
 
 fn encoded_digits(word: &str) -> ~str {
-    let mut encoding = ~"";
+    let mut encoding = encoded_digit(word.char_at(0));
 
-    for letter in word.chars() {
+    for letter in tail(word).chars() {
         if is_complete(encoding) {
             break;
         }
@@ -66,7 +66,7 @@ pub fn encoded_digit(letter: char) -> ~str {
 }
 
 fn is_complete(encoding: &str) -> bool {
-    return encoding.len() == MAX_CODE_LENGTH -1;
+    return encoding.len() == MAX_CODE_LENGTH;
 }
 
 fn last_digit(encoding: &str) -> ~str {

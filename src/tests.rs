@@ -64,3 +64,8 @@ fn soundex_encoding_ignores_case_when_encoding_consonants() {
     let soundex = Soundex::new();
     assert_eq!(soundex.encode("BCDL"), soundex.encode("Bcdl"));
 }
+
+#[test]
+fn soundex_encoding_combines_duplicate_codes_when_2nd_letter_duplicates_1st() {
+    check_soundex(~"Bbcd", ~"B230");
+}

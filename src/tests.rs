@@ -4,28 +4,27 @@ use soundex::Soundex;
 
 mod soundex;
 
+fn check_soundex(word: ~str, expected: ~str) {
+    let soundex = Soundex::new();
+    assert_eq!(soundex.encode(word), expected);
+}
+
 #[test]
 fn soundex_encoding_retains_sole_letter_of_one_letter_word() {
-    let soundex = Soundex::new();
-    let encoded = soundex.encode("A");
-    assert_eq!(encoded, ~"A000");
+    check_soundex(~"A", ~"A000");
 }
 
 #[test]
 fn soundex_encoding_pads_with_zeros_to_ensure_three_digits() {
-    let soundex = Soundex::new();
-    let encoded = soundex.encode("I");
-    assert_eq!(encoded, ~"I000");
+    check_soundex(~"I", ~"I000");
 }
 
 #[test]
 fn soundex_encoding_replaces_constants_with_appropriate_digits() {
-    let soundex = Soundex::new();
-    assert_eq!(soundex.encode("Ax"), ~"A200");
+    check_soundex(~"Ax", ~"A200");
 }
 
 #[test]
 fn soundex_encoding_ignores_non_alphabetics() {
-    let soundex = Soundex::new();
-    assert_eq!(soundex.encode("A#"), ~"A000");
+    check_soundex(~"A#", ~"A000");
 }

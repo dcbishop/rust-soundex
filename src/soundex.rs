@@ -1,6 +1,9 @@
+use std::str;
+
 pub struct Soundex;
 
 static MAX_CODE_LENGTH: uint = 4;
+static NOT_A_DIGIT: &'static str = "*";
 
 impl Soundex {
     pub fn new() -> Soundex {
@@ -41,7 +44,8 @@ fn encoded_digits(word: &str) -> ~str {
             break;
         }
 
-        if encoded_digit(letter) != last_digit(encoding) {
+        let digit = encoded_digit(letter);
+        if !str::eq_slice(digit, NOT_A_DIGIT) && encoded_digit(letter) != last_digit(encoding) {
             encoding.push_str(encoded_digit(letter));
         }
     }
@@ -57,7 +61,7 @@ pub fn encoded_digit(letter: char) -> ~str {
         'l' => ~"4",
         'm' | 'n' => ~"5",
         'r' => ~"6",
-        _ => ~"",
+        _ => NOT_A_DIGIT.to_owned(),
     };
 }
 
@@ -67,7 +71,7 @@ fn is_complete(encoding: &str) -> bool {
 
 fn last_digit(encoding: &str) -> ~str {
     if encoding.len() == 0 {
-        return ~"";
+        return NOT_A_DIGIT.to_owned();
     }
     return encoding.slice(encoding.len()-1, encoding.len()).to_owned();
 }

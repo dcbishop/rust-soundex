@@ -1,3 +1,5 @@
+extern crate collections;
+
 use soundex::Soundex;
 
 mod soundex;
@@ -19,6 +21,11 @@ fn soundex_encoding_pads_with_zeros_to_ensure_three_digits() {
 #[test]
 fn soundex_encoding_replaces_constants_with_appropriate_digits() {
     let soundex = Soundex::new();
-    assert_eq!(soundex.encode("Ab"), ~"A100");
-    assert_eq!(soundex.encode("Ac"), ~"A200");
+    assert_eq!(soundex.encode("Ax"), ~"A200");
+}
+
+#[test]
+fn soundex_encoding_ignores_non_alphabetics() {
+    let soundex = Soundex::new();
+    assert_eq!(soundex.encode("A#"), ~"A000");
 }

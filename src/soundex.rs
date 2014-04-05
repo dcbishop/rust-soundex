@@ -30,9 +30,15 @@ fn encoded_digits(word: &str) -> ~str {
 }
 
 fn encode_digit(letter: u8) -> ~str {
-    if letter == 'c' as u8 {
-        return ~"2";
-    }
+    let c_letter = letter as char;
 
-    return ~"1";
+    return match c_letter {
+        'b' | 'f' | 'p' | 'v' => ~"1",
+        'c' | 'g' | 'j' | 'k' | 'q' | 's' | 'x' | 'z' => ~"2",
+        'd' | 't' => ~"3",
+        'l' => ~"4",
+        'm' | 'n' => ~"5",
+        'r' => ~"6",
+        _ => ~"",
+    };
 }

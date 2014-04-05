@@ -5,6 +5,8 @@
 #![feature(globs)]
 #![feature(macro_rules)]
 
+extern crate collections;
+
 pub use soundex::*;
 
 mod soundex;

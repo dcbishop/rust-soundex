@@ -29,17 +29,20 @@ fn tail<'a>(string: &'a str) -> &'a str {
 fn encoded_digits(word: &str) -> ~str {
     let mut encoding = ~"";
 
-    for c in word.bytes() {
-        encoding.push_str(encoded_digit(c as char));
+    for letter in word.chars() {
         if is_complete(encoding) {
             break;
+        }
+
+        if encoded_digit(letter) != last_digit(encoding) {
+            encoding.push_str(encoded_digit(letter));
         }
     }
 
     return encoding;
 }
 
-fn encoded_digit(letter: char) -> ~str {
+pub fn encoded_digit(letter: char) -> ~str {
     return match letter {
         'b' | 'f' | 'p' | 'v' => ~"1",
         'c' | 'g' | 'j' | 'k' | 'q' | 's' | 'x' | 'z' => ~"2",
@@ -53,4 +56,11 @@ fn encoded_digit(letter: char) -> ~str {
 
 fn is_complete(encoding: &str) -> bool {
     return encoding.len() == MAX_CODE_LENGTH -1;
+}
+
+fn last_digit(encoding: &str) -> ~str {
+    if encoding.len() == 0 {
+        return ~"";
+    }
+    return encoding.slice(encoding.len()-1, encoding.len()).to_owned();
 }

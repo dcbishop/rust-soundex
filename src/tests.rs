@@ -44,3 +44,11 @@ fn soundex_encoding_limits_length_to_four_characters() {
 fn soundex_encoding_ignores_vowel_like_letters() {
    check_soundex(~"Baeiouhycdl", ~"B234"); 
 }
+
+#[test]
+fn soundex_encoding_combines_duplicate_encodings() {
+   assert_eq!(soundex::encoded_digit('b'), soundex::encoded_digit('f'));
+   assert_eq!(soundex::encoded_digit('c'), soundex::encoded_digit('g'));
+   assert_eq!(soundex::encoded_digit('d'), soundex::encoded_digit('t'));
+   check_soundex(~"Abfcgdt", ~"A123");
+}

@@ -1,5 +1,6 @@
 rust-soundex
 ============
+[![Build Status](https://travis-ci.org/dcbishop/rust-soundex.svg)](https://travis-ci.org/dcbishop/rust-soundex)
 
 This is a simple Soundex structure implemented in Rust.
 

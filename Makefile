@@ -5,9 +5,10 @@ TEST_BIN_NAME=${BUILD_DIR}/${TARGET_NAME}-test
 EXAMPLE_BIN_NAME=${BUILD_DIR}/${TARGET_NAME}-example
 
 SRC_DIR=src
+TEST_DIR=tests
 BUILD_DIR=build
 MAIN_SRC=${SRC_DIR}/lib.rs
-TEST_SRC=${SRC_DIR}/tests.rs
+TEST_SRC=${TEST_DIR}/tests.rs
 EXAMPLE_SRC=${SRC_DIR}/examples/example.rs
 DUMMY_FILE=${BUILD_DIR}/lib${TARGET_NAME}.dummy
 
@@ -25,8 +26,8 @@ ${DUMMY_FILE}: ${MAIN_SRC} ${SRCS} ${BUILD_DIR}
 	${RUSTC} ${MAIN_SRC} --out-dir ${BUILD_DIR}/
 	touch $@
 
-${TEST_BIN_NAME}: ${TEST_SRC} ${SRCS} ${BUILD_DIR}
-	${RUSTC} ${TEST_SRC} --test -o ${TEST_BIN_NAME}
+${TEST_BIN_NAME}: ${TEST_SRC} ${SRCS} lib ${BUILD_DIR}
+	${RUSTC} ${TEST_SRC} --test -o ${TEST_BIN_NAME} -L ${BUILD_DIR}
 	./${TEST_BIN_NAME}
 
 ${EXAMPLE_BIN_NAME}: ${EXAMPLE_SRC} lib ${BUILD_DIR}

@@ -1,4 +1,4 @@
-#![crate_id = "soundex#0.0.1"]
+#![crate_name = "soundex"]
 #![crate_type = "lib"]
 #![desc = "Rust soundex implementation."]
 #![license = "CC0"]

@@ -21,6 +21,7 @@ doc/*
 *.jar
 tmp/*
 build/*
+target/*
 *.sw?
 .hhhh
 build/*
@@ -31,3 +32,4 @@ CMakeFiles/*
 !.gitignore
 !.travis.yml
 compile_commands.json
+Cargo.lock
